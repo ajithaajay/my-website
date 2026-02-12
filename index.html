@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ajitha ❤️ Pravin</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:black;height:100vh;overflow:hidden;color:white}
+
+/* FLOATING HEARTS */
+.heart{
+  position:fixed;
+  bottom:-30px;
+  font-size:22px;
+  animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:0}
+  50%{opacity:1}
+  to{transform:translateY(-120vh);opacity:0}
+}
+
+/* ROAMING */
+.roam{
+  position:fixed;
+  font-size:32px;
+  animation:roam 4s infinite alternate, blink 1.5s infinite;
+}
+@keyframes roam{to{transform:translate(60px,60px)}}
+@keyframes blink{50%{opacity:.3}}
+
+/* SECTIONS */
+.section{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  text-align:center;
+  display:none;
+}
+.section.active{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+/* PAGE 3 BACKGROUND */
+#p3{
+  background:
+    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url("C:\\Users\\91805\\Downloads\\photo 1.jpeg") center/cover no-repeat;
+}
+
+/* TEXT */
+h1{
+  font-size:3.3rem;
+  color:red;
+  text-shadow:0 0 25px red;
+}
+h2{
+  margin-top:15px;
+  line-height:1.7;
+  max-width:800px;
+}
+
+/* BUTTONS */
+button{
+  margin:0;
+  padding:14px 32px;
+  font-size:1.1rem;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.3s;
+}
+button:hover{transform:scale(1.1)}
+.yes{background:red;color:white}
+.no{background:white;color:red}
+
+/* YES NO SINGLE LINE */
+.btn-row{
+  display:flex;
+  gap:25px;
+  justify-content:center;
+  align-items:center;
+  margin-top:25px;
+}
+
+/* TYPING */
+.typing{
+  border-right:2px solid red;
+  padding-right:6px;
+}
+
+/* CARD */
+.card{
+  width:260px;
+  height:340px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 30px red;
+  cursor:pointer;
+}
+.card img{width:100%;height:100%;object-fit:cover}
+
+/* PAGE 3 IMAGE */
+.p3img{
+  width:260px;
+  margin:20px 0;
+  border-radius:20px;
+  box-shadow:0 0 25px red;
+}
+
+/* FINAL HEART */
+.big-heart{
+  font-size:90px;
+  animation:beat 1.2s infinite;
+  cursor:pointer;
+}
+@keyframes beat{50%{transform:scale(1.3)}}
+
+/* FIREWORK HEARTS */
+.fire{
+  position:fixed;
+  font-size:26px;
+  animation:fire 2s forwards;
+}
+@keyframes fire{
+  to{
+    transform:translate(var(--x),var(--y)) scale(1.5);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+  <source src="C:\Users\91805\Downloads\Theri Flute BGM.m4r" type="audio/mpeg">
+</audio>
+
+<audio id="kiss">
+  <source src="kiss.mp3" type="audio/mpeg">
+</audio>
+
+<div class="roam" style="top:10%;left:10%">❤️</div>
+<div class="roam" style="top:70%;left:80%">💖</div>
+<div class="roam" style="top:30%;left:60%">💘</div>
+
+<!-- PAGE 1 -->
+<div class="section active" id="p1">
+  <h1><span class="typing" id="type"></span></h1>
+  <h2>Do you love me forever? 💞</h2>
+
+  <div class="btn-row">
+    <button class="yes" onclick="yesClick()">Yes 💖</button>
+    <button class="no" onclick="noClick()">No 💔</button>
+  </div>
+
+  <p id="msg"></p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="section" id="p2">
+  <h1>Our Greeting Card open it my love 💝</h1><br>
+  <div class="card" onclick="go(3)">
+    <img src="C:\\Users\\91805\\Downloads\\WhatsApp Image 2026-02-09 at 4.43.29 PM.jpeg">
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="section" id="p3">
+  <h2>
+    You are my precious gift 💖<br><br>
+    I never lose you.<br><br>
+    In all the years to come,<br>
+    you and I will be loving lovers ❤️<br><br>
+    Forever with you my love 💞
+  </h2>
+  <button class="yes" onclick="go(4)">❤️</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="section" id="p4">
+  <h1>Happy Valentine’s Day my love 💘</h1>
+  <h2>I love you paa ❤️</h2><br>
+  <div class="big-heart" onclick="finalLove()">❤️</div>
+  <p>(Touch my heart)</p>
+</div>
+
+<script>
+function go(n){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+}
+
+function noClick(){
+  document.getElementById("msg").innerText="Please click YES my love 😘❤️";
+}
+
+function yesClick(){
+  startBGM();
+  playKiss();
+  fireworks();
+  go(2);
+}
+
+function startBGM(){
+  let bgm=document.getElementById("bgm");
+  if(bgm.paused){
+    bgm.volume=0.6;
+    bgm.play();
+  }
+}
+
+let text="Ajitha ❤️ Pravin",i=0;
+setInterval(()=>{
+  if(i<text.length){
+    document.getElementById("type").innerText+=text[i++];
+  }
+},150);
+
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerText="❤️";
+  h.style.left=Math.random()*100+"%";
+  h.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},300);
+
+function playKiss(){
+  document.getElementById("kiss").play();
+}
+
+function fireworks(){
+  for(let i=0;i<30;i++){
+    let f=document.createElement("div");
+    f.className="fire";
+    f.innerText="❤️";
+    f.style.left="50%";
+    f.style.top="50%";
+    f.style.setProperty("--x",(Math.random()*600-300)+"px");
+    f.style.setProperty("--y",(Math.random()*-600)+"px");
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),2000);
+  }
+}
+
+function finalLove(){
+  playKiss();
+  fireworks();
+}
+</script>
+
+</body>
+</html>
